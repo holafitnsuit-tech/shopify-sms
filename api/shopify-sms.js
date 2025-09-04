@@ -20,9 +20,9 @@ Order #${order.order_number} is processing.
 Call: 01576952688
 Whatsapp: https://rb.gy/nscihy`;
 
-    // Ensure message length never exceeds 134 chars
-    if (message.length > 134) {
-      message = message.substring(0, 134);
+    // Ensure message length never exceeds 158 chars
+    if (message.length > 158) {
+      message = message.substring(0, 158);
     }
 
     const apiKey = "CqGUEe5Vmqt8yPKo7K8t";
@@ -45,4 +45,5 @@ Whatsapp: https://rb.gy/nscihy`;
     res.status(405).json({ message: "Method not allowed" });
   }
 }
+
 
