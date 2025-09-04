@@ -3,12 +3,22 @@ import fetch from "node-fetch";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const order = req.body;
-    const phone = order?.shipping_address?.phone || "";
-    const message = `Thank you, ${order.customer?.first_name || "Customer"}! Your order #${order.order_number} has been received.`;
+
+    // Get phone number from order
+    let phone = order?.shipping_address?.phone || "";
+    let number = phone.replace(/^\+/, ""); // remove leading +
+
+    // Convert 01XXXXXXXXX → 8801XXXXXXXXX
+    if (number.startsWith("01")) {
+      number = "88" + number;
+    }
+
+    const message = `Thank you, ${
+      order.customer?.first_name || "Customer"
+    }! Your order #${order.order_number} has been received.`;
 
     const apiKey = "CqGUEe5Vmqt8yPKo7K8t";
     const senderId = "8809617617772";
-    const number = phone.replace(/^\+/, "");
 
     const url = `https://bulksmsbd.net/api/smsapi?api_key=${apiKey}&senderid=${senderId}&number=${number}&message=${encodeURIComponent(
       message
@@ -27,3 +37,4 @@ export default async function handler(req, res) {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
+
