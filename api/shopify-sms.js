@@ -17,8 +17,8 @@ export default async function handler(req, res) {
     let message = `fitnsuit.com
 Thanks ${order.customer?.first_name || "Customer"}
 Order #${order.order_number} is processing.
-📞 01576952688
-💬 https://rb.gy/nscihy`;
+Call: 01576952688
+Whatsapp: https://rb.gy/nscihy`;
 
     // Ensure message length never exceeds 134 chars
     if (message.length > 134) {
@@ -45,3 +45,4 @@ Order #${order.order_number} is processing.
     res.status(405).json({ message: "Method not allowed" });
   }
 }
+
